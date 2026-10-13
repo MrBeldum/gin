@@ -1092,7 +1092,7 @@ func TestMappingStructTextUnmarshalerFallbackForm(t *testing.T) {
 	}
 	err := mappingByPtr(&s, formSource{"a": {`.1`}}, "form")
 	require.NoError(t, err)
-	assert.Equal(t, 0.1, s.Amount.value)
+	assert.InEpsilon(t, 0.1, s.Amount.value, 1e-9)
 }
 
 func TestMappingStructTextUnmarshalerFallbackUri(t *testing.T) {
@@ -1101,7 +1101,7 @@ func TestMappingStructTextUnmarshalerFallbackUri(t *testing.T) {
 	}
 	err := mappingByPtr(&s, formSource{"a": {`.1`}}, "uri")
 	require.NoError(t, err)
-	assert.Equal(t, 0.1, s.Amount.value)
+	assert.InEpsilon(t, 0.1, s.Amount.value, 1e-9)
 }
 
 func TestMappingStructPointerTextUnmarshalerFallbackForm(t *testing.T) {
@@ -1111,7 +1111,7 @@ func TestMappingStructPointerTextUnmarshalerFallbackForm(t *testing.T) {
 	err := mappingByPtr(&s, formSource{"a": {`.1`}}, "form")
 	require.NoError(t, err)
 	require.NotNil(t, s.Amount)
-	assert.Equal(t, 0.1, s.Amount.value)
+	assert.InEpsilon(t, 0.1, s.Amount.value, 1e-9)
 }
 
 // bothJSONAndText implements both json.Unmarshaler and
